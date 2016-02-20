@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+/* example:
+
+#thing {
+width: 100px;
+}
+
+
+
+
+
+*/
+
+
+.map {
+  width: 500px;
+  height: 500px;
+}
