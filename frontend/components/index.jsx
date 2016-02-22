@@ -1,5 +1,7 @@
 var React = require('react');
 var BenchStore = require('../stores/bench');
+var Map = require('./map');
+
 
 var Index = React.createClass({
 
@@ -21,7 +23,9 @@ var Index = React.createClass({
 
   render: function(){
     return(
-      <div>divy dog</div>
+      <div>
+
+      </div>
     );
   }
 });

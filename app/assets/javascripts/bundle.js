@@ -52,9 +52,10 @@
 	var ApiActions = __webpack_require__(160);
 
 	var Index = __webpack_require__(184);
+	var Search = __webpack_require__(186);
 
 	document.addEventListener("DOMContentLoaded", function () {
-	  ReactDOM.render(React.createElement(Index, null), document.getElementById('content'));
+	  ReactDOM.render(React.createElement(Search, null), document.getElementById('content'));
 	});
 
 	window.BenchStore = BenchStore;
@@ -26504,6 +26505,7 @@
 
 	var React = __webpack_require__(1);
 	var BenchStore = __webpack_require__(166);
+	var Map = __webpack_require__(185);
 
 	var Index = React.createClass({
 	  displayName: 'Index',
@@ -26526,15 +26528,66 @@
 	  },
 
 	  render: function () {
-	    return React.createElement(
-	      'div',
-	      null,
-	      'divy dog'
-	    );
+	    return React.createElement('div', null);
 	  }
 	});
 
 	module.exports = Index;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var BenchStore = __webpack_require__(166);
+
+	var Map = React.createClass({
+	  displayName: 'Map',
+
+
+	  componentDidMount: function () {
+	    var mapDOMNode = this.refs.map;
+	    var mapOptions = {
+	      center: { lat: 37.7758, lng: -122.435 },
+	      zoom: 13
+	    };
+	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { ref: 'map', className: 'map' },
+	      'I am a google map?'
+	    );
+	  }
+
+	});
+
+	module.exports = Map;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var Map = __webpack_require__(185);
+	var Index = __webpack_require__(184);
+
+	var Search = React.createClass({
+	  displayName: 'Search',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(Map, null),
+	      React.createElement(Index, null)
+	    );
+	  }
+	});
+
+	module.exports = Search;
 
 /***/ }
 /******/ ]);
