@@ -19668,9 +19668,10 @@
 	var ApiActions = __webpack_require__(160);
 
 	var ApiUtil = {
-	  fetchBenches: function () {
+	  fetchBenches: function (bounds) {
 	    $.ajax({
 	      url: "api/benches",
+	      data: { bounds: bounds.toJSON() },
 	      success: function (benches) {
 	        ApiActions.receiveAll(benches);
 	      }
@@ -26541,6 +26542,8 @@
 	var React = __webpack_require__(1);
 	var BenchStore = __webpack_require__(166);
 
+	var ApiUtil = __webpack_require__(159);
+
 	var Map = React.createClass({
 	  displayName: 'Map',
 
@@ -26552,6 +26555,24 @@
 	      zoom: 13
 	    };
 	    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+
+	    this.map.addListener('idle', this._onIdle);
+	    this.listener = BenchStore.addListener(this._onchange);
+	  },
+
+	  _onIdle: function () {
+	    var bounds = this.map.getBounds();
+	    ApiUtil.fetchBenches(bounds);
+	  },
+
+	  _onchange: function () {
+	    BenchStore.all().forEach(function (bench) {
+	      new google.maps.Marker({
+	        position: { lat: bench.lat, lng: bench.long },
+	        map: this.map,
+	        title: "bench"
+	      });
+	    }.bind(this));
 	  },
 
 	  render: function () {
